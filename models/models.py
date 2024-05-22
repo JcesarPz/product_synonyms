@@ -37,7 +37,7 @@ class ProductTemplate(models.Model):
                 for syn in rec.synonym_ids:
                     name_list.append(syn.name)
             name_list.append(rec.name)        
-            rec.all_names= "",name_list
+            rec.all_names= '%s',name_list
     
     @api.model        
     def _search_all_names(self, operator, value):
