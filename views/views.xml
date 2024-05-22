@@ -1,60 +1,40 @@
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="product_synonyms.list">
-      <field name="name">product_synonyms list</field>
-      <field name="model">product_synonyms.product_synonyms</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
+    <record model="ir.ui.view" id="product_template_tree_synonym_inherit">
+        <field name="name">Product Template Tree Synonym Inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="uom_id" position="after">
+                <field name="all_names" invisible="1"/>
+            </field>
+        </field>
     </record>
--->
-
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="product_synonyms.action_window">
-      <field name="name">product_synonyms window</field>
-      <field name="res_model">product_synonyms.product_synonyms</field>
-      <field name="view_mode">tree,form</field>
+    
+    <record model="ir.ui.view" id="product_template_form_synonym_inherit">
+        <field name="name">Product Template Form Synonym Inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="synonym_page" string="Otros nombres">
+                    <field name="synonym_ids">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
+        </field>
     </record>
--->
 
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="product_synonyms.action_server">
-      <field name="name">product_synonyms server</field>
-      <field name="model_id" ref="model_product_synonyms_product_synonyms"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
+    <record model="ir.ui.view" id="product_template_search_synonym_inherit">
+        <field name="name">Product Template Search Inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <field name="attribute_line_ids" position="after">
+                <field name="synonym_ids"/>
+            </field>
+        </field>
     </record>
--->
-
-    <!-- Top menu item -->
-<!--
-    <menuitem name="product_synonyms" id="product_synonyms.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="product_synonyms.menu_1" parent="product_synonyms.menu_root"/>
-    <menuitem name="Menu 2" id="product_synonyms.menu_2" parent="product_synonyms.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="product_synonyms.menu_1_list" parent="product_synonyms.menu_1"
-              action="product_synonyms.action_window"/>
-    <menuitem name="Server to list" id="product_synonyms" parent="product_synonyms.menu_2"
-              action="product_synonyms.action_server"/>
--->
-  </data>
 </odoo>
