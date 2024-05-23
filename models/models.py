@@ -50,7 +50,7 @@ class ProductTemplate(models.Model):
         args=args or []
         domain=[]
         if name:
-            domain=[('all_names',operator,name)]
+            domain=['|',('name', 'ilike', name),('synonym_ids','ilike',name)]
         return self._search(domain + args, limit=limit, access_rights_uid=name_get_uid)
             
 
