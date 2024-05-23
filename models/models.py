@@ -25,7 +25,8 @@ class ProductTemplate(models.Model):
     )
     
     all_names=fields.Char(
-        compute="_compute_all_names"
+        compute="_compute_all_names",
+        search="_search_all_names"
     )
     
     
@@ -37,7 +38,7 @@ class ProductTemplate(models.Model):
                 for syn in rec.synonym_ids:
                     name_list.append(syn.name)
             name_list.append(rec.name)        
-            rec.all_names= '%s',name_list
+            rec.all_names= name_list
     
     @api.model        
     def _search_all_names(self, operator, value):
@@ -45,7 +46,7 @@ class ProductTemplate(models.Model):
             
             
     @api.model
-    def _name_search(self, name='', args=None, operator='ilike', limit=100, name_get_uid=None):
+    def name_search(self, name='', args=None, operator='ilike', limit=100, name_get_uid=None):
         args=args or []
         domain=[]
         if name:
